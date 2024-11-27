@@ -15,19 +15,19 @@ export function GetAllCharacters() {
 
                 if (Array.isArray(data.characters)) {
                     const arrayList = data.characters.map((char: any) => {
-                        return new Characters(
-                            char.id,
-                            char.name,
-                            char.images,
-                            char.debut,
-                            char.family,
-                            char.jutsu || [],
-                            char.natureType || []
-                        );
+                        return new Characters({
+                            id: char.id,
+                            name: char.name,
+                            images: char.images,
+                            debut: char.debut,
+                            family: char.family,
+                            jutsu: char.jutsu || [],
+                            natureType: char.natureType || [],
+                            personal: char.personal 
+                        });
                     });
 
                     setCharacters(arrayList);
-                    
                 }
             } catch (error) {
                 console.log(error + ' Error fetching characters');
@@ -38,36 +38,30 @@ export function GetAllCharacters() {
     }, []);
 
     return (
-        
         <div className="flex flex-wrap justify-center">
-        {   
-        
-        characters.map((character: Characters) => (
-            <div className="max-w-sm rounded overflow-hidden shadow-lg m-4"          
-            key={character.getId()}>
+            {characters.map((character: Characters) => (
+                <div className="max-w-sm rounded overflow-hidden shadow-lg m-4" key={character.getId()}>
+                    <div className="px-6 py-4">
+                        <div className="font-bold text-xl mb-2">
+                            {JSON.stringify(character.getFamily())}
+                            <br />
+                            {JSON.stringify(character.getDebut())}
+                            <br />
+                            {JSON.stringify(character.getFamily())}
+                            <br />
+                            {JSON.stringify(character.getJutsu()?.join(', ') || '')}
+                            <br />
+                            {JSON.stringify(character.getNatureType()?.join(', ') || '')}
+                        </div>
 
-                <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">
-
-                    { JSON.stringify(character.getFamily()) }
-                        <br />
-                    { JSON.stringify(character.getDebut()) }
-                        <br />
-                    {JSON.stringify(character.getFamily()) }
-                        <br />
-                    { JSON.stringify(character.getJutsu().join(', ')) }
-                        <br />
-                    { JSON.stringify(character.getNatureType().join(', ')) }
+                        <img
+                            className="w-full"
+                            src={character.getImages()?.[0] ?? 'default_image_url.jpg'}
+                            alt={character.getName()}
+                        />
                     </div>
-
-                    <img
-                        className="w-full"
-                        src={character.getImages()[0] || 'default_image_url.jpg'}
-                        alt={character.getName()}
-                    />
                 </div>
-            </div>
-        ))}
-    </div>
-);
+            ))}
+        </div>
+    );
 }

@@ -1,23 +1,56 @@
 import { Personal } from './Personal';
 
+
 export class Characters {
 
-private id: number;
-private name: string;
-private images: string[];
-private debut: string;
-private family: string; 
-private jutsu: string[];
-private natureType: string[];
+    private id?: number;
+    private name?: string;
+    private images?: string[];
+    private debut?: string;
+    private family?: string;
+    private jutsu?: string[];
+    private natureType?: string[];
+    private personal?: Personal;
 
-private personal: Personal;
+    constructor({
+        id,
+        name,
+        images,
+        debut,
+        family,
+        jutsu,
+        natureType,
+        personal,
+      }: {
+        id?: number;
+        name?: string;
+        images?: string[];
+        debut?: string;
+        family?: string;
+        jutsu?: string[];
+        natureType?: string[];
+        personal?: Personal;
+      } = {}) {
+        this.id = id;
+        this.name = name;
+        this.images = images ?? [];
+        this.debut = debut ?? "Unknown";
+        this.family = family ?? "Unknown";
+        this.jutsu = jutsu ?? [];
+        this.natureType = natureType ?? [];
+        this.personal = personal;
+    }
 
-    public getId(): number {
+    // Getters and Setters
+    public getId(): number | undefined {
         return this.id;
     }
 
+    public setId(id: number): void {
+        this.id = id;
+    }
 
-    public getName(): string {
+    public getName(): string | undefined {
         return this.name;
     }
 
@@ -25,7 +58,7 @@ private personal: Personal;
         this.name = name;
     }
 
-    public getImages(): string[] {
+    public getImages(): string[] | undefined {
         return this.images;
     }
 
@@ -33,7 +66,7 @@ private personal: Personal;
         this.images = images;
     }
 
-    public getDebut(): string {
+    public getDebut(): string | undefined {
         return this.debut;
     }
 
@@ -41,7 +74,7 @@ private personal: Personal;
         this.debut = debut;
     }
 
-    public getFamily(): string {
+    public getFamily(): string | undefined {
         return this.family;
     }
 
@@ -49,7 +82,7 @@ private personal: Personal;
         this.family = family;
     }
 
-    public getJutsu(): string[] {
+    public getJutsu(): string[] | undefined {
         return this.jutsu;
     }
 
@@ -57,7 +90,7 @@ private personal: Personal;
         this.jutsu = jutsu;
     }
 
-    public getNatureType(): string[] {
+    public getNatureType(): string[] | undefined {
         return this.natureType;
     }
 
@@ -65,35 +98,11 @@ private personal: Personal;
         this.natureType = natureType;
     }
 
-    public getPersonal(): Personal {
+    public getPersonal(): Personal | undefined {
         return this.personal;
     }
 
     public setPersonal(personal: Personal): void {
         this.personal = personal;
     }
-
-
-    constructor (id: number, 
-        name: string,
-        images: string[],
-        debut: string,
-        family: string, 
-        jutsu: string[], 
-        natureType: string[], 
-        ) {
-        this.id = id;
-        this.name = name;
-        this.images = images;
-        this.debut = debut;
-        this.family = family;
-        this.jutsu = jutsu;
-        this.natureType = natureType;
-        
-        }
-
-   
-
-
-
 }

@@ -1,23 +1,38 @@
-import { CardPlayer } from "./components/cardplayer";
-import { GetAllCharacters } from "./components/getAllCharacters";
+
+import { Bar } from "./components/headerTest";
+import { CardList } from "./components/ui/card";
+import  walpaper from "@/assets/605599.jpg";
+import logo from "@/assets/naruto-logo-shippuden-removebg-preview.png";
+
 
 export function App() {
   return (
-
 <>
 
-  <div className=" body h-screen w-screen flex justify-center items-center  " >
+<div className="">
+  
+<div className="sticky"  >
+  <Bar />
+ </div>  
 
-    <div>
-      <CardPlayer/>
+    <div className="body img">
+      <div style={{
+          position: "absolute",
+          
+      }}>
+          <img src={logo} alt="logo" className="logo w-[150px]" />
+          <div className="flex ">
+          <CardList />
+          
+        </div>
       </div>
-      
-      <div className="">
-        <GetAllCharacters/>
+          <img src={walpaper} alt="logo" className="opacity-45" />
+        
+
       </div>
 
-    </div>
- </>
+  </div>
+</>
 
 );
 }
