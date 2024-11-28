@@ -7,11 +7,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export function DenseAppBar() {
   return (
-    <Box sx={{ flexGrow: 1,
-
-     }}>
-      <AppBar position="static">
-        <Toolbar variant="dense" sx={{bgcolor: 'white', color: 'black'  }} >
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ transition: 'background-color 0.5s ease', bgcolor: 'transparent' }}>
+        <Toolbar variant="dense" sx={{ bgcolor: 'transparent', color: 'white' }}>
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>

@@ -1,10 +1,6 @@
 import { Personal } from './Personal';
 
-
 export class Characters {
-    get(arg0: string) {
-      throw new Error('Method not implemented.');
-    }
 
     private id?: number;
     private name?: string;
@@ -14,6 +10,8 @@ export class Characters {
     private jutsu?: string[];
     private natureType?: string[];
     private personal?: Personal;
+
+    
 
     constructor({
         id,
