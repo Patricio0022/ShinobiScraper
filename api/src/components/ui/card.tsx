@@ -25,7 +25,7 @@ export function GridCard() {
         if (Array.isArray(data.characters)) {
           const arrayList = data.characters.map((char: any) => ({
             id: char.id || 0,
-            image: char.images?.[0] || '/static/images/placeholder.jpg',
+            image: char.images?.[1] || char.images?.[0] || 'https://via.placeholder.com/150',
             name: char.name || 'Unknown',
           }));
           setCharacters(arrayList);

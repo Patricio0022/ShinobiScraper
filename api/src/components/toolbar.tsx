@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 export function DenseAppBar() {
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ transition: 'background-color 0.5s ease', bgcolor: 'transparent' }}>
