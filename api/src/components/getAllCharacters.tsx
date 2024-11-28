@@ -39,7 +39,9 @@ export function GetAllCharacters() {
 
     return (
         <div className="flex flex-wrap justify-center">
-            {characters.map((character: Characters) => (
+
+                {characters.map((character: Characters) => (
+
                 <div className="max-w-sm rounded overflow-hidden shadow-lg m-4" key={character.getId()}>
                     <div className="px-6 py-4">
                         <div className="font-bold text-xl mb-2">
