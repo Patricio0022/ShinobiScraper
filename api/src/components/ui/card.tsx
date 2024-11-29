@@ -8,6 +8,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 import { SkeletonCard } from '../skeletonCard';
 import { useNavigate } from 'react-router-dom';
+import walpaper from "@/assets/Profile_Jiraiya.PNG.webp";
 
 export function GridCard() {
   const [characters, setCharacters] = useState<{ id: number, image: string, name: string }[]>([]);
@@ -25,7 +26,7 @@ export function GridCard() {
         if (Array.isArray(data.characters)) {
           const arrayList = data.characters.map((char: any) => ({
             id: char.id || 0,
-            image: char.images?.[1] || char.images?.[0] || 'https://via.placeholder.com/150',
+            image: char.images?.[1] || char.images?.[0] || walpaper,
             name: char.name || 'Unknown',
           }));
           setCharacters(arrayList);
