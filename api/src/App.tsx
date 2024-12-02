@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { GridCard } from "./components/ui/card";
+import { GridCard } from "./components/Home";
 import { CharacterDetails } from "./components/getCharById";
 import { DenseAppBar } from "./components/toolbar";
 import walpaper from "@/assets/297090-final.jpg";

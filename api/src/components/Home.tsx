@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
-import { SkeletonCard } from '../skeletonCard';
+import { SkeletonCard } from './skeletonCard';
 import { useNavigate } from 'react-router-dom';
 import walpaper from "@/assets/Profile_Jiraiya.PNG.webp";
 
@@ -65,12 +65,16 @@ export function GridCard() {
           : characters.map((character, i) => (
               <Grid item xs={12} sm={6} md={4} key={character.id}>
                 <Card sx={{ maxWidth: 250 }}>
-                  <CardActionArea>
+                  <CardActionArea 
+                    onClick={() => navigate(`/character/${character.id}`)} 
+                  >
+                    
                     <CardMedia
                       component="img"
                       height="140"
                       image={character.image}
                       alt={`Character ${i + 1}`}
+                    
                     />
                     <CardContent>
                       <Typography
@@ -82,14 +86,14 @@ export function GridCard() {
                         {character.name}
                       </Typography>
                       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        Description for character {i + 1}.
+                        
                       </Typography>
                     </CardContent>
                   </CardActionArea>
                   <CardActions>
                     <Button
                       size="small"
-                      color="primary"
+                      sx={{color: 'black'}}
                       onClick={() => navigate(`/character/${character.id}`)} 
                     >
                       More

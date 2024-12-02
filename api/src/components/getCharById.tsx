@@ -477,17 +477,11 @@ export function CharacterDetails() {
       )}
                   </TableBody>
                 </Table>
-
                 </div>
               </Typography>
             </CardContent>
-  
-            <CardActions>
-              <Button size="small" color="primary" onClick={() => navigate("/")}>
-                Back
-              </Button>
-            </CardActions>
           </Card>
+
         </Grid>
       </Grid>
     </Paper>
