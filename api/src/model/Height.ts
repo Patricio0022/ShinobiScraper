@@ -1,8 +1,5 @@
-export class Height {
-
-private partI: string;
-private partII: string;
-private blankPeriod: string;
-
-
-}
+export interface Height {
+    partI?: string;
+    partII?: string;
+    blankPeriod?: string;
+  }

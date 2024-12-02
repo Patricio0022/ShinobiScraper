@@ -31,10 +31,13 @@ export function App() {
           </div>
 
           <div className="flex z-20 text-center w-full min-h-screen flex-col justify-center items-center mt-5">
+
             <Routes>
               <Route path="/" element={<GridCard />} />
               <Route path="/character/:id" element={<CharacterDetails />} />
             </Routes>
+
+            
           </div>
         </div>
       </div>

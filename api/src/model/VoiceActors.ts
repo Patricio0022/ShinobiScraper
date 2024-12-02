@@ -1,7 +1,4 @@
-export class VoiceActors{
-
-private japanese: Array<string>;
-private english: Array<string>;
-
-
+export interface VoiceActors {
+  japanese?: string;
+  english?: string;
 }

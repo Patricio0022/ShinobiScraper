@@ -3,13 +3,13 @@ import { Personal } from './Personal';
 export class Characters {
 
     private id?: number;
-    private name?: string;
+    private  name?: string;
     private images?: string[];
     private debut?: string;
     private family?: string;
     private jutsu?: string[];
     private natureType?: string[];
-    private personal?: Personal;
+    private personal?: Personal | undefined;
 
     
 

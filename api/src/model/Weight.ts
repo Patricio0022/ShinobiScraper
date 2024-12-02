@@ -1,6 +1,4 @@
-export class Weight {
-
-private partI: string;
-private partII: string;
-
+export interface Weight {
+  partI?: string;
+  partII?: string;
 }

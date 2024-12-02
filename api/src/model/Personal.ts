@@ -1,170 +1,131 @@
-import {Rank} from "./Rank";
-import {VoiceActors} from "./VoiceActors";
-import {Age} from "./Age";
-import {Height} from "./Height";
-import {Weight} from "./Weight";
+import { Age } from './Age';
+import { Height } from './Height';
+import { Weight } from './Weight';
+import { VoiceActors } from './VoiceActors';
 
-export class Personal{
+export class Personal {
+  private birthdate: string;
+  private sex: string;
+  private age: Age | null;
+  private height: Height | null;
+  private weight: Weight | null;
+  private bloodType: string;
+  private kekkeiGenkai: string[];
+  private classification: string[];
+  private tailedBeast: string;
+  private occupation: string[];
+  private affiliation: string[];
+  private team: string[];
+  private clan: string;
+  private titles: string[];
+  private rank: string;
+  private tools: string[];
+  private voiceActors: VoiceActors | null;
 
-private birthdate: string;
-private sex: string;
-private age: Age;
-private height: Height;
-private weight: Weight;
-private bloodType: string;
-private kekkeiGenkai: Array<string>;
-private classification: Array<string>;
-private tailedBeast: string;
-private occupation: Array<string>;
-private affiliation: Array<string>;
-private team: Array<string>;
-private clan: string;
-private titles: Array<string>;
+  constructor(
+    birthdate: string,
+    sex: string,
+    age: Age | null,
+    height: Height | null,
+    weight: Weight | null,
+    bloodType: string,
+    kekkeiGenkai: string[],
+    classification: string[],
+    tailedBeast: string,
+    occupation: string[],
+    affiliation: string[],
+    team: string[],
+    clan: string,
+    titles: string[],
+    rank: string,
+    tools: string[],
+    voiceActors: VoiceActors | null
+  ) {
+    this.birthdate = birthdate;
+    this.sex = sex;
+    this.age = age;
+    this.height = height;
+    this.weight = weight;
+    this.bloodType = bloodType;
+    this.kekkeiGenkai = kekkeiGenkai;
+    this.classification = classification;
+    this.tailedBeast = tailedBeast;
+    this.occupation = occupation;
+    this.affiliation = affiliation;
+    this.team = team;
+    this.clan = clan;
+    this.titles = titles;
+    this.rank = rank;
+    this.tools = tools;
+    this.voiceActors = voiceActors;
+  }
 
-private rank: Rank;
+  // Getters para acessar os dados
+  public getBirthdate(): string {
+    return this.birthdate;
+  }
 
-private tools: Array<string>;
+  public getSex(): string {
+    return this.sex;
+  }
 
-private voiceActors: VoiceActors;
+  public getAge(): Age | null {
+    return this.age;
+  }
 
+  public getHeight(): Height | null {
+    return this.height;
+  }
 
+  public getWeight(): Weight | null {
+    return this.weight;
+  }
 
-    public getBirthdate(): string {
-        return this.birthdate;
-    }
+  public getBloodType(): string {
+    return this.bloodType;
+  }
 
-    public setBirthdate(birthdate: string): void {
-        this.birthdate = birthdate;
-    }
+  public getKekkeiGenkai(): string[] {
+    return this.kekkeiGenkai;
+  }
 
-    public getSex(): string {
-        return this.sex;
-    }
+  public getClassification(): string[] {
+    return this.classification;
+  }
 
-    public setSex(sex: string): void {
-        this.sex = sex;
-    }
+  public getTailedBeast(): string {
+    return this.tailedBeast;
+  }
 
-    public getAge(): Age {
-        return this.age;
-    }
+  public getOccupation(): string[] {
+    return this.occupation;
+  }
 
-    public setAge(age: Age): void {
-        this.age = age;
-    }
+  public getAffiliation(): string[] {
+    return this.affiliation;
+  }
 
-    public getHeight(): Height {
-        return this.height;
-    }
+  public getTeam(): string[] {
+    return this.team;
+  }
 
-    public setHeight(height: Height): void {
-        this.height = height;
-    }
+  public getClan(): string {
+    return this.clan;
+  }
 
-    public getWeight(): Weight {
-        return this.weight;
-    }
+  public getTitles(): string[] {
+    return this.titles;
+  }
 
-    public setWeight(weight: Weight): void {
-        this.weight = weight;
-    }
+  public getRank(): string {
+    return this.rank;
+  }
 
-    public getBloodType(): string {
-        return this.bloodType;
-    }
+  public getTools(): string[] {
+    return this.tools;
+  }
 
-    public setBloodType(bloodType: string): void {
-        this.bloodType = bloodType;
-    }
-
-    public getKekkeiGenkai(): Array<string> {
-        return this.kekkeiGenkai;
-    }
-
-    public setKekkeiGenkai(kekkeiGenkai: Array<string>): void {
-        this.kekkeiGenkai = kekkeiGenkai;
-    }
-
-    public getClassification(): Array<string> {
-        return this.classification;
-    }
-
-    public setClassification(classification: Array<string>): void {
-        this.classification = classification;
-    }
-
-    public getTailedBeast(): string {
-        return this.tailedBeast;
-    }
-
-    public setTailedBeast(tailedBeast: string): void {
-        this.tailedBeast = tailedBeast;
-    }
-
-    public getOccupation(): Array<string> {
-        return this.occupation;
-    }
-
-    public setOccupation(occupation: Array<string>): void {
-        this.occupation = occupation;
-    }
-
-    public getAffiliation(): Array<string> {
-        return this.affiliation;
-    }
-
-    public setAffiliation(affiliation: Array<string>): void {
-        this.affiliation = affiliation;
-    }
-
-    public getTeam(): Array<string> {
-        return this.team;
-    }
-
-    public setTeam(team: Array<string>): void {
-        this.team = team;
-    }
-
-    public getClan(): string {
-        return this.clan;
-    }
-
-    public setClan(clan: string): void {
-        this.clan = clan;
-    }
-
-    public getTitles(): Array<string> {
-        return this.titles;
-    }
-
-    public setTitles(titles: Array<string>): void {
-        this.titles = titles;
-    }
-
-    public getRank(): Rank {
-        return this.rank;
-    }
-
-    public setRank(rank: Rank): void {
-        this.rank = rank;
-    }
-
-    public getTools(): Array<string> {
-        return this.tools;
-    }
-
-    public setTools(tools: Array<string>): void {
-        this.tools = tools;
-    }
-
-    public getVoiceActors(): VoiceActors {
-        return this.voiceActors;
-    }
-
-    public setVoiceActors(voiceActors: VoiceActors): void {
-        this.voiceActors = voiceActors;
-    }
-
-
-
+  public getVoiceActors(): VoiceActors | null {
+    return this.voiceActors;
+  }
 }
