@@ -1,5 +1,5 @@
 export interface Height {
-    partI?: string;
-    partII?: string;
-    blankPeriod?: string;
+    "Part I": string;
+    "Part II": string;
+    "Blank Period": string;
   }

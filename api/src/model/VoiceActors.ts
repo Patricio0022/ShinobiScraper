@@ -1,4 +1,6 @@
 export interface VoiceActors {
-  japanese?: string;
-  english?: string;
-}
+
+  japanese: string[]
+  english: string[] 
+
+} 

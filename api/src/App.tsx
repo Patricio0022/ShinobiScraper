@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GridCard } from "./components/ui/card";
-import { CharacterDetails } from "./components/ui/getCharById";
+import { CharacterDetails } from "./components/getCharById";
 import { DenseAppBar } from "./components/toolbar";
 import walpaper from "@/assets/297090-final.jpg";
 import logo from "@/assets/naruto-logo-shippuden-removebg-preview.png";
