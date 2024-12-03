@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GridCard } from "./components/Home";
 import { CharacterDetails } from "./components/getCharById";
 import { DenseAppBar } from "./components/toolbar";
+import { ScraperData } from "./components/scraper";
 import walpaper from "@/assets/297090-final.jpg";
 import logo from "@/assets/naruto-logo-shippuden-removebg-preview.png";
 
@@ -35,6 +36,7 @@ export function App() {
             <Routes>
               <Route path="/" element={<GridCard />} />
               <Route path="/character/:id" element={<CharacterDetails />} />
+              <Route path="/scraper/:id" element={<ScraperData />} /> 
             </Routes>
 
             
