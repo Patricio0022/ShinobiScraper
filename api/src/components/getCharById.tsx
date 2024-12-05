@@ -14,6 +14,7 @@ import {
   TableCell,
 } from "@mui/material";
 
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { SkeletonCard } from "./skeletonCard";
@@ -25,6 +26,8 @@ import { Weight } from "@/model/Weight";
 import { VoiceActors } from "@/model/VoiceActors";
 import { Rank } from "@/model/Rank";
 import { Tools } from "@/model/Tools";
+import { ScraperData } from "./scraper";
+
 
 interface Personal {
   birthdate: string;
@@ -57,8 +60,11 @@ interface Characters {
   voiceActors: VoiceActors;
 }
 
+interface ScraperDataProps {
+  characterName: string | undefined; 
+}
+
 export function CharacterDetails() {
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const [character, setCharacter] = useState< Characters | null>(null);
@@ -67,6 +73,8 @@ export function CharacterDetails() {
   const [isRankVisible, setRankVisible] = useState(false);
   const [isFamilyVisible, setFamilyVisible] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const { id, name } = useParams<{ id: string; name: string }>();
 
   const toggleTeamVisibility = () => setTeamVisible(!isTeamVisible);
   const toggleRankVisibility = () => setRankVisible(!isRankVisible);
@@ -169,11 +177,17 @@ export function CharacterDetails() {
   }
 
   return (
-    <Paper
+    <>
+     <div className="flex ">
+    <Paper sx={{ display: 'flex', flexDirection: 'row-reverse', flexGrow: 1 }}>
+
+      <div className="h-[1600px]">
+      <Paper
       sx={(theme) => ({
-        p: 4,
-        margin: "auto",
-        maxWidth: "75%",
+        p: 3,
+        margin: "none",
+        maxWidth: "100%",
+        maxHeight: "100%",
         backgroundColor: "#fff",
         ...theme.applyStyles("dark", { backgroundColor: "#1A2027" }),
       })}
@@ -476,15 +490,23 @@ export function CharacterDetails() {
           </TableRow>
         </>
       )}
-                  </TableBody>
-                </Table>
-                </div>
-              </Typography>
-            </CardContent>
-          </Card>
+                    </TableBody>
+                  </Table>
+                  </div>
+                </Typography>
+              </CardContent>
+            </Card>
 
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
+          </div>    
+          <div className="flex ml-4">
+            {name && <ScraperData characterName={name} />} 
+          </div>
     </Paper>
+    </div>
+
+    </>
   );
 }  

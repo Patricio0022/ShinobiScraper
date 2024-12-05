@@ -1,82 +1,71 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import walpaper from "@/assets/Profile_Jiraiya.PNG.webp"; 
+import React, { useState, useEffect } from 'react';
 
-export function ScraperData() {
-  const { id } = useParams(); 
-  const [character, setCharacter] = useState<{ name: string; image: string; description: string } | null>(null);
-  const [scrapedData, setScrapedData] = useState<string[]>([]); 
-  const [loading, setLoading] = useState(true);
+
+
+interface ScraperDataProps {
+  characterName: string; 
+}
+
+export const ScraperData: React.FC<ScraperDataProps> = ({ characterName }) => {
+  const [data, setData] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchScraperData = async (name: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`http://localhost:5000/scraper?name=${encodeURIComponent(name)}`);
+
+      if (!response.ok) {
+        throw new Error('Erro ao acessar os dados do scraper');
+      }
+
+      const result = await response.json();
+      setData(result.items);
+    } catch (err: any) {
+      setError(err.message || 'Erro desconhecido');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchCharacterDetails = async () => {
-      const baseUrl = 'https://dattebayo-api.onrender.com'; 
-      try {
-        const response = await fetch(`${baseUrl}/characters/${id}`);
-        const data = await response.json();
-        setCharacter({
-          name: data.name || 'Unknown',
-          image: data.images?.[0] || walpaper,  
-          description: data.description || 'No description available.',
-        });
-        setLoading(false);
-      } catch (error) {
-        console.error('Erro ao buscar detalhes do personagem:', error);
-        setLoading(false);
-      }
-    };
+    if (characterName) {
+      fetchScraperData(characterName); 
+    }
+  }, [characterName]);
 
-    const fetchScrapedData = async () => {
-      const baseUrl = 'http://localhost:5000/scrape'; 
-      try {
-        const response = await fetch(`${baseUrl}?name=${encodeURIComponent(id || '')}`);
-        const data = await response.json();
-        setScrapedData(data.items); 
-      } catch (error) {
-        console.error('Erro ao buscar dados do scraper:', error);
-      }
-    };
+  return(
+    <div className="scraper-data-container" style={{ fontFamily: 'Arial, sans-serif', padding: '10px', maxWidth: '600px', margin: '0 auto' }}>
+      {loading && (
+        <p style={{ fontSize: '18px', color: 'black', fontWeight: 'bold', marginBottom: '10px' }}>Loading...</p>
+      )}
 
-    fetchCharacterDetails();
-    fetchScrapedData(); 
-  }, [id]);  
+      {error && (
+        <p style={{ fontSize: '16px', color: '#F44336', fontWeight: 'bold', marginBottom: '10px' }}>{error}</p>
+      )}
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!character) {
-    return <div>Character not found</div>;
-  }
-
-  return (
-    <Card sx={{ maxWidth: 600, margin: 'auto' }}>
-      <CardMedia
-        component="img"
-        height="300"
-        image={character.image}
-        alt={character.name}
-      />
-      <CardContent>
-        <Typography variant="h4" gutterBottom>
-          {character.name}
-        </Typography>
-        <Typography variant="body1">{character.description}</Typography>
-
-        <Typography variant="h6" gutterBottom>
-          Scraped Data:
-        </Typography>
-        {scrapedData.length > 0 ? (
-          <ul>
-            {scrapedData.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        ) : (
-          <Typography variant="body2">No scraped data available.</Typography>
-        )}
-      </CardContent>
-    </Card>
+      {data.length > 0 ? (
+        <ul style={{ listStyleType: 'none', paddingLeft: '0', marginTop: '20px' }}>
+          {data.map((item, index) => (
+            <li
+              key={index}
+              style={{
+                fontSize: '16px',
+                color: '#333',
+                marginBottom: '12px',
+                lineHeight: '1.6',
+              }}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p style={{ fontSize: '16px', color: '#757575' }}>...</p>
+      )}
+    </div>
   );
-}
+};

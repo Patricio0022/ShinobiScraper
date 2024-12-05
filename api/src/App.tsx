@@ -2,14 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GridCard } from "./components/Home";
 import { CharacterDetails } from "./components/getCharById";
 import { DenseAppBar } from "./components/toolbar";
-import { ScraperData } from "./components/scraper";
 import walpaper from "@/assets/297090-final.jpg";
 import logo from "@/assets/naruto-logo-shippuden-removebg-preview.png";
 
 export function App() {
   return (
     <Router>
-      <div className="relative">
+      <div className="relative">  
         <div className="sticky top-0 z-10">
           <DenseAppBar />
         </div>
@@ -35,8 +34,8 @@ export function App() {
 
             <Routes>
               <Route path="/" element={<GridCard />} />
-              <Route path="/character/:id" element={<CharacterDetails />} />
-              <Route path="/scraper/:id" element={<ScraperData />} /> 
+              <Route path="/character/:id/:name" element={<CharacterDetails />} />
+             
             </Routes>
 
             

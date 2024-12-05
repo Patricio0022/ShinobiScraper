@@ -1,18 +1,21 @@
 import express from 'express';
 import fetch from 'node-fetch'; 
 import cheerio from 'cheerio';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
+
 const PORT = 5000;
 
-app.get('/scrape', async (req, res) => {
+app.get('/scraper', async (req, res) => {
     try {
         const { name } = req.query;
         if (!name) {
             return res.status(400).json({ error: 'Character name is required' });
         }
 
-        
         const formattedName = name.replace(' ', '_');
         const url = `https://naruto.fandom.com/wiki/${formattedName}`;
 
