@@ -1,6 +1,6 @@
 import { Grid, Paper, Button, Pagination } from '@mui/material';
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,17 +8,27 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 import { SkeletonCard } from './skeletonCard';
-import walpaper from "@/assets/Profile_Jiraiya.PNG.webp";
+import walpaper from "@/assets/notfound.jpg";
 
 export function GridCard() {
-  const [characters, setCharacters] = useState<{ id: number, image: string, name: string }[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const navigate = useNavigate();
+  const [characters, setCharacters] = useState<{ id: number, 
+                                                 image: string, 
+                                                 name: string } [] > ([]); ;// array of characters object
+  const [loading, setLoading] = useState(false); // the initial state of loading is false
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
+  const [page, setPage] = useState(1); // the initial state of page is 1
+  const [totalPages, setTotalPages] = useState(1);// 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const pageFromUrl = parseInt(urlParams.get('page') || '1', 10);
+    setPage(pageFromUrl);
+  }, [location])
+
+  const fetchData = useCallback(async () => { 
+    setLoading(true);  
     const baseUrl = 'https://dattebayo-api.onrender.com';
     const limit = 20;
 
@@ -27,28 +37,35 @@ export function GridCard() {
       const data = await response.json();
 
       if (Array.isArray(data.characters)) {
+
         const arrayList = data.characters.map((char: any) => ({
           id: char.id || 0,
           image: char.images?.[1] || char.images?.[0] || walpaper,
           name: char.name || 'Unknown',
-        }));
+        })
+      );
         setCharacters(arrayList);
         setTotalPages(Math.ceil(data.total / limit)); 
       }
+
     } catch (error) {
       console.error('Error fetching data:', error);
+
     } finally {
       setLoading(false);
     }
-  }, [page]);
+  }, [page]); // callback function to fetch data when the page changes
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData, page]);
+    fetchData(); 
+  }, [fetchData]); // this function will be called when the page is loaded and when the page changes
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+  const handlePageChange = 
+        (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value); 
+    navigate(`?page=${value}`);// navigate to the page with the new value and return the new value
   };
+
 
   return (
     <Paper sx={(theme) => ({
@@ -87,13 +104,18 @@ export function GridCard() {
             </Grid>
           ))}
       </Grid>
+
       <Pagination 
         count={totalPages} 
         page={page} 
         onChange={handlePageChange} 
         color="primary" 
-        sx={{ marginTop: 2, display: 'flex', justifyContent: 'center' }} 
+        sx={{ marginTop: 2, 
+              display: 'flex', 
+              justifyContent: 'center' 
+            }} 
       />
+
     </Paper>
   );
 }
